@@ -27,13 +27,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Spring Boot Starter Data JPA: Hibernate, Spring Data Repositories, JDBC Connection Pooling -->
+		<!-- Spring Boot Starter Data JPA: Hibernate ORM, Spring Data Repositories, HikariCP -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- Spring Boot DevTools: Automatic application restarts and live reload during development -->
+		<!-- Spring Boot DevTools: Automatic restarts during development -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -41,14 +41,21 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- MySQL JDBC Driver: Enables communication between Java and MySQL database -->
+		<!-- MySQL JDBC Driver: For production / local MySQL database connectivity -->
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Spring Boot Starter Test: JUnit 5, AssertJ, Mockito, Spring Test context -->
+		<!-- H2 In-Memory Database: For zero-config local development, testing, and prototyping -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Spring Boot Starter Test: JUnit 5, AssertJ, Mockito -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
