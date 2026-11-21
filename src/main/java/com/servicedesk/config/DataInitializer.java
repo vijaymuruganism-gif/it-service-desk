@@ -7,15 +7,13 @@ import com.servicedesk.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * Seeds initial baseline data (categories, users, sample ticket) into the database on startup.
- *
- * <p>Implements {@link CommandLineRunner}, whose {@code run} method is invoked by
- * Spring Boot immediately after the application context has fully initialized.
+ * Seeds initial baseline data (categories, users with BCrypt hashed passwords, sample ticket) into the database on startup.
  */
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -25,13 +23,16 @@ public class DataInitializer implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
     private final TicketRepository ticketRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public DataInitializer(CategoryRepository categoryRepository,
                            UserRepository userRepository,
-                           TicketRepository ticketRepository) {
+                           TicketRepository ticketRepository,
+                           PasswordEncoder passwordEncoder) {
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
         this.ticketRepository = ticketRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -49,12 +50,12 @@ public class DataInitializer implements CommandLineRunner {
             ));
         }
 
-        // 2. Seed initial users for testing (Admin, Support Engineer, Employee)
+        // 2. Seed initial users with encrypted passwords (admin123, engineer123, employee123)
         if (userRepository.count() == 0) {
-            log.info("Seeding initial users...");
-            User admin = new User("admin", "admin@servicedesk.com", "admin123", Role.ADMIN, "IT Infrastructure");
-            User engineer = new User("john_support", "john.support@servicedesk.com", "engineer123", Role.SUPPORT_ENGINEER, "IT Service Desk");
-            User employee = new User("alice_employee", "alice.employee@company.com", "employee123", Role.EMPLOYEE, "Finance & Operations");
+            log.info("Seeding initial users with BCrypt password hashing...");
+            User admin = new User("admin", "admin@servicedesk.com", passwordEncoder.encode("admin123"), Role.ADMIN, "IT Infrastructure");
+            User engineer = new User("john_support", "john.support@servicedesk.com", passwordEncoder.encode("engineer123"), Role.SUPPORT_ENGINEER, "IT Service Desk");
+            User employee = new User("alice_employee", "alice.employee@company.com", passwordEncoder.encode("employee123"), Role.EMPLOYEE, "Finance & Operations");
 
             userRepository.saveAll(List.of(admin, engineer, employee));
 
