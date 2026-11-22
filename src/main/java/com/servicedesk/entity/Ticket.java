@@ -2,16 +2,11 @@ package com.servicedesk.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JPA Entity representing an IT Service Desk support ticket.
- *
- * <p>Demonstrates relational mapping in JPA:
- * <ul>
- *   <li>{@code @ManyToOne} to {@link Category}: Many tickets belong to one category.</li>
- *   <li>{@code @ManyToOne} to {@link User} (createdBy): The employee who raised the ticket.</li>
- *   <li>{@code @ManyToOne} to {@link User} (assignedTo): The IT engineer assigned to resolve it.</li>
- * </ul>
  */
 @Entity
 @Table(name = "tickets")
@@ -47,15 +42,15 @@ public class Ticket {
     @JoinColumn(name = "assigned_to_user_id")
     private User assignedTo;
 
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    /**
-     * Mandatory default no-args constructor required by JPA.
-     */
     public Ticket() {
     }
 
@@ -146,6 +141,14 @@ public class Ticket {
 
     public void setAssignedTo(User assignedTo) {
         this.assignedTo = assignedTo;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public LocalDateTime getCreatedAt() {
