@@ -7,6 +7,9 @@ import com.servicedesk.dto.TicketResponseDto;
 import com.servicedesk.entity.Priority;
 import com.servicedesk.entity.TicketStatus;
 import com.servicedesk.service.TicketService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/v1/tickets")
+@Tag(name = "Tickets", description = "Endpoints for ticket creation, triage, engineer assignment, and resolution notes")
+@SecurityRequirement(name = "Bearer Authentication")
 public class TicketController {
 
     private final TicketService ticketService;
@@ -29,11 +34,8 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    /**
-     * Raises a new support ticket.
-     * Accessible by any authenticated user (EMPLOYEE, SUPPORT_ENGINEER, ADMIN).
-     */
     @PostMapping
+    @Operation(summary = "Raise a new support ticket", description = "Accessible by any authenticated user (EMPLOYEE, SUPPORT_ENGINEER, ADMIN).")
     public ResponseEntity<TicketResponseDto> createTicket(
             @Valid @RequestBody TicketRequestDto request,
             Principal principal) {
@@ -42,23 +44,15 @@ public class TicketController {
         return new ResponseEntity<>(createdTicket, HttpStatus.CREATED);
     }
 
-    /**
-     * Retrieves tickets relevant to the currently logged in user (Role-Based Access):
-     * - Employees see only their raised tickets.
-     * - Support Engineers see tickets assigned to them.
-     * - Admins see all tickets.
-     */
     @GetMapping("/my-tickets")
+    @Operation(summary = "Get current user's role-scoped tickets", description = "Employees see their raised tickets; Engineers see assigned tickets; Admins see all.")
     public ResponseEntity<List<TicketResponseDto>> getMyTickets(Principal principal) {
         return ResponseEntity.ok(ticketService.getMyTickets(principal.getName()));
     }
 
-    /**
-     * Retrieves all support tickets across the company.
-     * Restricted to Support Engineers and Admins.
-     */
     @GetMapping
     @PreAuthorize("hasAnyRole('SUPPORT_ENGINEER', 'ADMIN')")
+    @Operation(summary = "Get all tickets across organization", description = "Restricted to Support Engineers and Admins.")
     public ResponseEntity<List<TicketResponseDto>> getAllTickets(
             @RequestParam(required = false) TicketStatus status,
             @RequestParam(required = false) Priority priority) {
@@ -72,54 +66,40 @@ public class TicketController {
         return ResponseEntity.ok(ticketService.getAllTickets());
     }
 
-    /**
-     * Retrieves a single ticket by its ID.
-     */
     @GetMapping("/{id}")
+    @Operation(summary = "Get a ticket by its ID")
     public ResponseEntity<TicketResponseDto> getTicketById(@PathVariable Long id) {
         return ResponseEntity.ok(ticketService.getTicketById(id));
     }
 
-    /**
-     * Assigns a ticket to an IT support engineer.
-     * Restricted to Admins.
-     */
     @PatchMapping("/{id}/assign")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Assign a ticket to an engineer", description = "Restricted to Admins.")
     public ResponseEntity<TicketResponseDto> assignTicket(
             @PathVariable Long id,
             @RequestParam Long engineerId) {
         return ResponseEntity.ok(ticketService.assignTicket(id, engineerId));
     }
 
-    /**
-     * Updates ticket status (e.g. IN_PROGRESS, RESOLVED, CLOSED).
-     * Restricted to Support Engineers and Admins.
-     */
     @PatchMapping("/{id}/status")
     @PreAuthorize("hasAnyRole('SUPPORT_ENGINEER', 'ADMIN')")
+    @Operation(summary = "Update ticket status", description = "Restricted to Support Engineers and Admins.")
     public ResponseEntity<TicketResponseDto> updateTicketStatus(
             @PathVariable Long id,
             @RequestParam TicketStatus status) {
         return ResponseEntity.ok(ticketService.updateTicketStatus(id, status));
     }
 
-    /**
-     * Deletes a ticket by ID.
-     * Restricted to Admins only.
-     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Delete a ticket", description = "Restricted to Admins only.")
     public ResponseEntity<Void> deleteTicket(@PathVariable Long id) {
         ticketService.deleteTicket(id);
         return ResponseEntity.noContent().build();
     }
 
-    /**
-     * Adds a comment or resolution note to a ticket.
-     * Any authenticated user can comment on a ticket.
-     */
     @PostMapping("/{id}/comments")
+    @Operation(summary = "Post a comment or resolution note on a ticket")
     public ResponseEntity<CommentResponseDto> addComment(
             @PathVariable Long id,
             @Valid @RequestBody CommentRequestDto request,
@@ -128,10 +108,8 @@ public class TicketController {
         return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
 
-    /**
-     * Retrieves all comments / resolution notes posted on a ticket.
-     */
     @GetMapping("/{id}/comments")
+    @Operation(summary = "Get all comments / resolution notes for a ticket")
     public ResponseEntity<List<CommentResponseDto>> getCommentsForTicket(@PathVariable Long id) {
         return ResponseEntity.ok(ticketService.getCommentsForTicket(id));
     }
