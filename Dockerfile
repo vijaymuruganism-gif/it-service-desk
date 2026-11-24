@@ -39,15 +39,16 @@ COPY --from=builder /workspace/target/*.jar app.jar
 RUN chown -R springboot:springboot /app
 USER springboot:springboot
 
-# Expose application port
+# Expose default application port
 EXPOSE 8080
 
-# Set default profile to MySQL
-ENV SPRING_PROFILES_ACTIVE=mysql
+# Environment variables (supports dynamic cloud PORT and defaults to dev H2 for zero-config cloud boot)
+ENV PORT=8080
+ENV SPRING_PROFILES_ACTIVE=dev
 
 # Application Healthcheck
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
-  CMD curl -f http://localhost:8080/api/v1/health || exit 1
+  CMD curl -f http://localhost:${PORT:-8080}/api/v1/health || exit 1
 
 # Launch Spring Boot Application
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
