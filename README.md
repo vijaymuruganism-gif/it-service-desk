@@ -1,5 +1,7 @@
 # 🏢 IT Service Desk Management System
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Swagger_UI-2ea44f?style=for-the-badge&logo=swagger&logoColor=white)](https://key-clean-love-trio.trycloudflare.com/swagger-ui/index.html)
+[![Build & Test](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/vijaymuruganism-gif/it-service-desk/actions)
 [![Java 17](https://img.shields.io/badge/Java-17%20LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Spring Boot 3](https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Spring Security](https://img.shields.io/badge/Spring_Security-6.x-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white)](https://spring.io/projects/spring-security)
@@ -8,6 +10,15 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI_3-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
 [![JUnit 5](https://img.shields.io/badge/JUnit-5_&_Mockito-25A162?style=for-the-badge&logo=junit5&logoColor=white)](https://junit.org/junit5/)
+
+> ### 🌐 Live Application Deployment
+> The backend application is actively deployed live on Cloudflare's edge network!
+> * **Interactive Swagger UI**: [https://key-clean-love-trio.trycloudflare.com/swagger-ui/index.html](https://key-clean-love-trio.trycloudflare.com/swagger-ui/index.html)
+> * **System Health Endpoint**: [https://key-clean-love-trio.trycloudflare.com/api/v1/health](https://key-clean-love-trio.trycloudflare.com/api/v1/health)
+> * **Pre-Seeded Test Accounts**:
+>   * `admin` / `admin123` (`ROLE_ADMIN` — Full Administrative Access & Deletion)
+>   * `john_support` / `engineer123` (`ROLE_SUPPORT_ENGINEER` — Triage & Comments)
+>   * `alice_employee` / `employee123` (`ROLE_EMPLOYEE` — Ticket Creation & Tracking)
 
 An enterprise-grade, role-based **IT Service Desk Management REST API** built with **Java 17** and **Spring Boot 3**. 
 
