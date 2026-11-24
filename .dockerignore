@@ -1,0 +1,18 @@
+# Git & IDEs
+.git
+.gitignore
+.gitattributes
+.idea
+.vscode
+*.iml
+
+# Build Artifacts
+target/
+*.jar
+*.war
+
+# Logs & Temp
+*.log
+temp/
+tmp/
+.mvn/timing

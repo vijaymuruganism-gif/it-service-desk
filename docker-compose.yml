@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # -------------------------------------------------------------------
+  # MySQL Database Service
+  # -------------------------------------------------------------------
+  mysqldb:
+    image: mysql:8.0
+    container_name: servicedesk-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: servicedesk_db
+      MYSQL_USER: servicedesk_user
+      MYSQL_PASSWORD: servicedesk_pass
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - servicedesk-network
+
+  # -------------------------------------------------------------------
+  # Spring Boot Application Backend Service
+  # -------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: servicedesk-app
+    restart: unless-stopped
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      DB_URL: jdbc:mysql://mysqldb:3306/servicedesk_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: servicedesk_user
+      DB_PASSWORD: servicedesk_pass
+    ports:
+      - "8080:8080"
+    networks:
+      - servicedesk-network
+
+# ---------------------------------------------------------------------
+# Named Volumes & Networks
+# ---------------------------------------------------------------------
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  servicedesk-network:
+    driver: bridge
