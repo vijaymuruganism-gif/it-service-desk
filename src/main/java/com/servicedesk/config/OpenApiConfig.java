@@ -7,8 +7,11 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 /**
  * OpenAPI 3 / Swagger documentation configuration with JWT Bearer authentication scheme.
@@ -21,6 +24,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
+                .servers(List.of(new Server().url("/").description("Default Server URL")))
                 .info(new Info()
                         .title("IT Service Desk Management System API")
                         .description("Enterprise REST APIs for ticket creation, triage, engineer assignment, resolution notes, and role-based access control.")
