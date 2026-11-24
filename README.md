@@ -103,9 +103,9 @@ When running in `dev` mode or upon initial boot, the system pre-seeds test accou
 
 | Username | Password | Role | Department | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| `admin` | `Admin@123` | `ROLE_ADMIN` | IT Infrastructure | Full administrative privileges, user management, and ticket deletion |
-| `support_engineer` | `Engineer@123` | `ROLE_IT_SUPPORT` | Technical Support | Can be assigned to tickets, triage status, and post resolution comments |
-| `john_doe` | `Employee@123` | `ROLE_EMPLOYEE` | Finance | Can raise tickets, view their own tickets, and post questions |
+| `admin` | `admin123` | `ROLE_ADMIN` | IT Infrastructure | Full administrative privileges, user management, and ticket deletion |
+| `john_support` | `engineer123` | `ROLE_SUPPORT_ENGINEER` | IT Service Desk | Can be assigned to tickets, triage status, and post resolution comments |
+| `alice_employee` | `employee123` | `ROLE_EMPLOYEE` | Finance & Operations | Can raise tickets, view their own tickets, and post questions |
 
 ---
 
