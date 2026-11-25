@@ -49,9 +49,7 @@ public class SecurityConfig {
                 // Configure endpoint authorizations
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
-                        .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/health").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/", "/api/v1/auth/**", "/api/v1/health", "/h2-console/**").permitAll()
                         // Swagger UI & OpenAPI Docs
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         // All other endpoints require a valid JWT token

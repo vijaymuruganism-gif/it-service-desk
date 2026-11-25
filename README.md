@@ -1,6 +1,6 @@
 # 🏢 IT Service Desk Management System
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Swagger_UI-2ea44f?style=for-the-badge&logo=swagger&logoColor=white)](https://administered-automobile-dryer-further.trycloudflare.com/swagger-ui/index.html)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Swagger_UI-2ea44f?style=for-the-badge&logo=swagger&logoColor=white)](https://it-service-desk-vy2j.onrender.com/swagger-ui/index.html)
 [![Build & Test](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/vijaymuruganism-gif/it-service-desk/actions)
 [![Java 17](https://img.shields.io/badge/Java-17%20LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Spring Boot 3](https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -11,10 +11,10 @@
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI_3-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
 [![JUnit 5](https://img.shields.io/badge/JUnit-5_&_Mockito-25A162?style=for-the-badge&logo=junit5&logoColor=white)](https://junit.org/junit5/)
 
-> ### 🌐 Live Application Deployment
-> The backend application is actively deployed live on Cloudflare's edge network!
-> * **Interactive Swagger UI**: [https://administered-automobile-dryer-further.trycloudflare.com/swagger-ui/index.html](https://administered-automobile-dryer-further.trycloudflare.com/swagger-ui/index.html)
-> * **System Health Endpoint**: [https://administered-automobile-dryer-further.trycloudflare.com/api/v1/health](https://administered-automobile-dryer-further.trycloudflare.com/api/v1/health)
+> ### 🌐 Permanent 24/7 Live Cloud Deployment (Render.com)
+> The backend application is actively deployed live on Render's cloud infrastructure:
+> * **Interactive Swagger UI**: [https://it-service-desk-vy2j.onrender.com/swagger-ui/index.html](https://it-service-desk-vy2j.onrender.com/swagger-ui/index.html)
+> * **System Health Endpoint**: [https://it-service-desk-vy2j.onrender.com/api/v1/health](https://it-service-desk-vy2j.onrender.com/api/v1/health)
 > * **Pre-Seeded Test Accounts**:
 >   * `admin` / `admin123` (`ROLE_ADMIN` — Full Administrative Access & Deletion)
 >   * `john_support` / `engineer123` (`ROLE_SUPPORT_ENGINEER` — Triage & Comments)
