@@ -1,6 +1,6 @@
 # 🏢 IT Service Desk Management System
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Swagger_UI-2ea44f?style=for-the-badge&logo=swagger&logoColor=white)](https://participants-hourly-nam-planned.trycloudflare.com/swagger-ui/index.html)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Swagger_UI-2ea44f?style=for-the-badge&logo=swagger&logoColor=white)](https://ashley-modeling-workout-extends.trycloudflare.com/swagger-ui/index.html)
 [![Build & Test](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/vijaymuruganism-gif/it-service-desk/actions)
 [![Java 17](https://img.shields.io/badge/Java-17%20LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Spring Boot 3](https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -13,8 +13,8 @@
 
 > ### 🌐 Live Application Deployment
 > The backend application is actively deployed live on Cloudflare's edge network!
-> * **Interactive Swagger UI**: [https://participants-hourly-nam-planned.trycloudflare.com/swagger-ui/index.html](https://participants-hourly-nam-planned.trycloudflare.com/swagger-ui/index.html)
-> * **System Health Endpoint**: [https://participants-hourly-nam-planned.trycloudflare.com/api/v1/health](https://participants-hourly-nam-planned.trycloudflare.com/api/v1/health)
+> * **Interactive Swagger UI**: [https://ashley-modeling-workout-extends.trycloudflare.com/swagger-ui/index.html](https://ashley-modeling-workout-extends.trycloudflare.com/swagger-ui/index.html)
+> * **System Health Endpoint**: [https://ashley-modeling-workout-extends.trycloudflare.com/api/v1/health](https://ashley-modeling-workout-extends.trycloudflare.com/api/v1/health)
 > * **Pre-Seeded Test Accounts**:
 >   * `admin` / `admin123` (`ROLE_ADMIN` — Full Administrative Access & Deletion)
 >   * `john_support` / `engineer123` (`ROLE_SUPPORT_ENGINEER` — Triage & Comments)
