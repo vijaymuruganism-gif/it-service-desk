@@ -52,13 +52,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     /**
-     * Extracts Bearer token from HTTP Authorization header.
+     * Extracts Bearer token from HTTP Authorization header, gracefully handling redundant Bearer prefixes.
      */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 
-        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7);
+        if (StringUtils.hasText(headerAuth)) {
+            String token = headerAuth.trim();
+            while (token.startsWith("Bearer ") || token.startsWith("bearer ")) {
+                token = token.substring(7).trim();
+            }
+            return token.isEmpty() ? null : token;
         }
 
         return null;
